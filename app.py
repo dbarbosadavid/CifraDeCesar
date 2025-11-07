@@ -75,6 +75,8 @@ def deslocar(
         ascii += deslocamento
         if ascii > 122:
             ascii -= 26
+        if ascii < 97:
+            ascii += 26
         textoCifrado += chr(ascii)
     
     return textoCifrado
@@ -118,7 +120,10 @@ def decifrarForcaBruta(textoCifrado: str):
     dict = {chave: valor for chave, valor in dict.items() if valor >= 1}
     dict = sorted(dict.items(), key=lambda item: item[1], reverse=True)
     
-    deslocamento = dict[0][0]
+    if len(dict) > 0: 
+        deslocamento = dict[0][0] 
+    else:
+        raise HTTPException(status_code=406, detail="Não foi possível decifrar o texto")
 
     texto = deslocar(texto=textoCifrado, deslocamento=deslocamento, call='decifrar')
     return texto
