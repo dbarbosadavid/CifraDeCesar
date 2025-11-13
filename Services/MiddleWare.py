@@ -8,7 +8,7 @@ from Services.Deslocar import deslocar
 def response(input):
     if not hasattr(input, 'deslocamento'):
         textoClaro = decifrarForcaBruta(input.textoCifrado)
-        validar(input.textoClaro, input.deslocamento)
+        validar(input.textoCifrado, 1)
         return DecifrarForcaBrutaResponse(textoClaro=textoClaro)
     else:
         if type(input) == CifrarRequest:

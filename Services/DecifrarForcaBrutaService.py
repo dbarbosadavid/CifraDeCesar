@@ -1,3 +1,4 @@
+from fastapi import HTTPException
 from Services.Deslocar import deslocar
 import requests
 
@@ -15,6 +16,9 @@ def decifrarForcaBruta(textoCifrado: str):
                     dict[i] += 1
                 else:
                     dict[i] = 1
+            
+        if dict.get(i) == len(texto):
+            break
 
     dict = {chave: valor for chave, valor in dict.items() if valor >= 1}
     dict = sorted(dict.items(), key=lambda item: item[1], reverse=True)
